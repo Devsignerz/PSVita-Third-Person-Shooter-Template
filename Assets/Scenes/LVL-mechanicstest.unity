@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 112000002, guid: 1d05221176fce314380a41f7ce85866a,
+  m_LightingDataAsset: {fileID: 112000002, guid: a4ad6c33dbd7bde49b7d0186add3f57e,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -568,7 +568,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1270535452}
-  m_LocalRotation: {x: 0.13473669, y: 0.0000000381238, z: -0.000000005183944, w: 0.99088144}
+  m_LocalRotation: {x: 0.13473669, y: -0.0000000381238, z: 0.000000005183944, w: 0.99088144}
   m_LocalPosition: {x: 0, y: 2.796, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -731,19 +731,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4668420819077396, guid: 8b85d42035de7074b9aafef8f1268922, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.000000029654624
+      value: 0.000000029654627
       objectReference: {fileID: 0}
     - target: {fileID: 4668420819077396, guid: 8b85d42035de7074b9aafef8f1268922, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000045831636
+      value: -0.000000004583164
       objectReference: {fileID: 0}
     - target: {fileID: 4161032207018144, guid: 8b85d42035de7074b9aafef8f1268922, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000190619
+      value: -0.000000019061899
       objectReference: {fileID: 0}
     - target: {fileID: 4161032207018144, guid: 8b85d42035de7074b9aafef8f1268922, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.000000002591971
+      value: 0.0000000025919715
       objectReference: {fileID: 0}
     - target: {fileID: 4607648918713644, guid: 8b85d42035de7074b9aafef8f1268922, type: 2}
       propertyPath: m_LocalRotation.y
