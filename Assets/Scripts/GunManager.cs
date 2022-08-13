@@ -38,10 +38,10 @@ public class GunManager : MonoBehaviour {
 
 	//handle shooting bs
 	public void shoot(){
-		Debug.Log("shoot");
 		Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
 		RaycastHit hit;
 		if(Physics.Raycast(ray, out hit)){
+			print(hit.collider.name);
 			Debug.DrawRay(ray.origin, ray.direction, Color.yellow);
 			currentAmmo--;
 			if(currentAmmo < 0)
