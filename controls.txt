@@ -1,0 +1,12 @@
+0 x
+1 circle
+2 square
+3 tri
+4 L
+5 R
+6 select
+7 start
+8 up
+9 left
+10 down
+11 rights
