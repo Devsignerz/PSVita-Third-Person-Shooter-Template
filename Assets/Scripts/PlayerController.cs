@@ -22,11 +22,13 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update(){
+		//arm the player with weapons
 		if(Input.GetKey(KeyCode.JoystickButton4) || Input.GetKey(KeyCode.Q)){
 			isArmed = true;
 			Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.LookAt = thearmedTarget;
 			Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow = thearmedTarget;
 		}
+		//unarm the player
 		else{
 			isArmed = false;
 			Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.LookAt = thetarget;
