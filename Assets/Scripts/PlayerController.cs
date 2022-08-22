@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour {
 	public CharacterController characterController;
@@ -12,12 +13,26 @@ public class PlayerController : MonoBehaviour {
 	public float gravity = 9.8f;
 	public bool isArmed = false;
 	public bool grounded;
+	[SerializeField]private Transform thetarget;
+	[SerializeField]private Transform thearmedTarget;
+	[SerializeField]private GameObject playerCamera;
+
+	void Start() {
+		
+	}
 
 	void Update(){
-		if(Input.GetKey(KeyCode.JoystickButton4) || Input.GetKey(KeyCode.Q))
+		if(Input.GetKey(KeyCode.JoystickButton4) || Input.GetKey(KeyCode.Q)){
 			isArmed = true;
-		else
+			Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.LookAt = thearmedTarget;
+			Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow = thearmedTarget;
+		}
+		else{
 			isArmed = false;
+			Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.LookAt = thetarget;
+			Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow = thetarget;
+			
+		}
 		if(transform.position.y <= (characterController.skinWidth * -1))
 			transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 		grounded = characterController.isGrounded;

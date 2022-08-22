@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour {
 	public float health;
 	public void Death(){
-		Destroy(gameObject, 2);
+		Destroy(gameObject);
 		//DIE
 	}
 
