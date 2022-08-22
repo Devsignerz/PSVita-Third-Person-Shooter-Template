@@ -535,7 +535,7 @@ PlayerSettings:
   psp2ManualPath: 
   psp2LiveAreaGatePath: Assets/BuildFiles/live area/gate.png
   psp2LiveAreaBackroundPath: Assets/BuildFiles/live area/bg0.png
-  psp2LiveAreaPath: 
+  psp2LiveAreaPath: Assets/BuildFiles/live area
   psp2LiveAreaTrialPath: live area
   psp2PatchChangeInfoPath: 
   psp2PatchOriginalPackage: 

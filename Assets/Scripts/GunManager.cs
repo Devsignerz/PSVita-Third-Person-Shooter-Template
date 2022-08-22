@@ -49,6 +49,7 @@ public class GunManager : MonoBehaviour {
 			else{
 				if(hit.collider.tag == "enemy"){
 					hit.collider.gameObject.GetComponent<EnemyAI>().Hit(damage);
+					print(hit.collider.gameObject.GetComponent<EnemyAI>().health);
 				}
 				GetComponent<AudioSource>().clip = shootingSound;
 			}

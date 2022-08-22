@@ -5,8 +5,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour {
 	public float health;
 	public void Death(){
-		GetComponent<Light>().enabled = true;
-		Destroy(this, 2);
+		Destroy(gameObject, 2);
 		//DIE
 	}
 
@@ -15,6 +14,7 @@ public class EnemyAI : MonoBehaviour {
 		//follow player
 	}
 	public void Hit(float damage){
+		health -= damage;
 		if(health <= 0){
 			Death();
 		}
