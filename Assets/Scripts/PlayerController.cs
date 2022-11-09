@@ -4,40 +4,62 @@ using UnityEngine;
 using Cinemachine;
 
 public class PlayerController : MonoBehaviour {
-	public CharacterController characterController;
-	public float speed = 6f;
-	private float turnSmoothTime = 0.1f;
-	private float turnSmoothVelocity;
-	public float health = 100f;
-	public float vSpeed = 0f;
-	public float gravity = 9.8f;
-	public bool isArmed = false;
-	public bool grounded;
-	[SerializeField]private Transform thetarget;
-	[SerializeField]private Transform thearmedTarget;
-	[SerializeField]private GameObject playerCamera;
+	public CharacterController characterController; //player character controller
+	public float speed = 6f; //player move speed
+	private float turnSmoothTime = 0.1f; //player rotation smoothness
+	private float turnSmoothVelocity; //player rotation speed
+	public float health = 100f; //player health
+	public float vSpeed = 0f; //player jump speed
+	public float gravity = 9.8f; //gravity
+	public bool isArmed = false; //is player aiming
+	public bool grounded; //is player on the ground
+	public bool canJump;
+	[SerializeField]private Transform thetarget; //camera point target
+	[SerializeField]private Transform thearmedTarget; //camera point target when aiming
 
-	void Start() {
-		
+	
+	public void GetHit(float damage){
+		health -= damage;
+		if(health < 0){
+			//die
+			print("DED!");
+		}
+	}
+
+	void OnTriggerEnter(Collider col){
+		if(col.gameObject.tag == "enemy hand"){
+			GetHit(col.gameObject.GetComponent<HitManager>().damage);
+		}
 	}
 
 	void Update(){
+
+		////DEBUG_make enemy aware
+		if(Input.GetKey(KeyCode.X))
+			GameObject.FindGameObjectWithTag("enemy").GetComponent<EnemyAI>().Aware(transform);
+
 		//arm the player with weapons
 		if(Input.GetKey(KeyCode.JoystickButton4) || Input.GetKey(KeyCode.Q)){
 			isArmed = true;
+			speed = 3f;
 			Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.LookAt = thearmedTarget;
 			Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow = thearmedTarget;
 		}
 		//unarm the player
 		else{
 			isArmed = false;
+			speed = 6f;
 			Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.LookAt = thetarget;
 			Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow = thetarget;
 			
 		}
-		if(transform.position.y <= (characterController.skinWidth * -1))
-			transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-		grounded = characterController.isGrounded;
+		//if player can jump in game
+		if(canJump){
+			//sloppy fix for a bug in game detecting if character is on ground
+			if(transform.position.y <= (characterController.skinWidth * -1))
+				transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+			grounded = characterController.isGrounded;
+		}
 		//get left and right stick
 		float hor = Input.GetAxisRaw("L X");
 		float ver = Input.GetAxisRaw("L Y");
