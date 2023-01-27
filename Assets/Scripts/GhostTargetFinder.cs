@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum GhostType{
+public enum GhostType
+{
     Oikake,
     Machibuse,
     Kimagure,
     Otoboke
 }
 
-public class GhostTargetFinder : MonoBehaviour{
+public class GhostTargetFinder : MonoBehaviour
+{
     public GhostStateSwitcher stateSwitcher;
     public GhostType gtype = GhostType.Oikake;
     public Transform player;
@@ -19,8 +21,10 @@ public class GhostTargetFinder : MonoBehaviour{
     public Vector3 eatenTarget = new Vector3(0, 0, 8);
 
 
-    Vector3 GhostTypeTarget(){
-        switch (gtype){
+    Vector3 GhostTypeTarget()
+    {
+        switch (gtype)
+        {
             case GhostType.Oikake:
                 return player.position;
 
@@ -39,8 +43,10 @@ public class GhostTargetFinder : MonoBehaviour{
         }
     }
 
-    public Vector3 Target(){
-        switch (stateSwitcher.state){
+    public Vector3 Target()
+    {
+        switch (stateSwitcher.state)
+        {
             case GhostState.Scatter:
                 return scatterTarget;
 
