@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - enemy
-  - enemy hand
+  - Walls
+  - ghost
+  - seed
   layers:
   - Default
   - TransparentFX
@@ -15,10 +16,10 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
+  - enemy
   - env
-  - 
-  - 
+  - player
+  - seed
   - 
   - 
   - 

@@ -4,8 +4,7 @@ using UnityEngine;
 
 
 
-public class GhostScript : MonoBehaviour
-{
+public class GhostScript : MonoBehaviour{
     public Transform myEyes;
     public GameObject ghostLeft;
     public GameObject ghostRight;
@@ -16,21 +15,18 @@ public class GhostScript : MonoBehaviour
     Vector3 nextPosition;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         Color color = ColorChooser();
         GetComponent<Renderer>().material.SetColor("_Color", color);
-        ghostLeft.GetComponent<Renderer>().material.SetColor("_Color", color);
-        ghostRight.GetComponent<Renderer>().material.SetColor("_Color", color);
+        //ghostLeft.GetComponent<Renderer>().material.SetColor("_Color", color);
+        //ghostRight.GetComponent<Renderer>().material.SetColor("_Color", color);
 
         nextPosition = transform.position;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (transform.position == nextPosition)
-        {
+    void Update(){
+        if (transform.position == nextPosition){
             nextDirecton = direction.FindNextDirection();
             nextPosition = direction.MoveInDirection(nextDirecton);
         }
@@ -68,13 +64,12 @@ public class GhostScript : MonoBehaviour
                              speed);
     }
 
-    Color ColorChooser()
-    {
+	//sets enemy color
+    Color ColorChooser(){
         if (direction.targetFinder.stateSwitcher.state == GhostState.Frigntened)
             return Color.blue;
 
-        switch (direction.targetFinder.gtype)
-        {
+        switch (direction.targetFinder.gtype){
             case GhostType.Oikake:
                 return Color.red;
 

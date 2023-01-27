@@ -13,60 +13,57 @@ public class GameModeScript : MonoBehaviour
     public Text highscoreBoard;
     public List<GameObject> Ghosts;
     public AudioSource EatingCookiePlayer;
-    public AudioSource MuiscPlayer;
+    public AudioSource MusicPlayer;
     public int seedScore = 0;
     public int maxScore = 0;
     float EatingCookieTimer = 0f;
-    bool ghostAudio = false;
+    //bool ghostAudio = false;
 
 
     float ghostSpeed = .3f;
 
-    void Start()
-    {
+    void Start(){
+		//reset everything and initiate ghosts
         Time.timeScale = 0;
         seedScore = 0;
         GhostInit();
     }
 
-    private void Update()
-    {
-        {
-            if (!MuiscPlayer.isPlaying)
-            {
+    private void Update(){{
+			//set everything back to normal when start game sound finishes playing
+            if (!MusicPlayer.isPlaying){
                 Destroy(readyText);
-                ghostAudio = true;
+                //ghostAudio = true;
                 Time.timeScale = 1;
             }
+			//pause the sound if some kind of timer hits zero
             if (EatingCookieTimer <= 0)
                 EatingCookiePlayer.Pause();
             else
                 EatingCookieTimer -= Time.deltaTime;
         }
         ScoreControler();
-        GhostAudioController();
+        //GhostAudioController();
 
+		//quit game/ changes to main menu
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
     }
 
-    void GhostInit()
-    {
-        foreach (GameObject ghost in Ghosts)
-        {
-            ghost.GetComponent<GhostScript>().speed = ghostSpeed;
+    void GhostInit(){
+        foreach (GameObject ghost in Ghosts){
+            //ghost.GetComponent<GhostScript>().speed = ghostSpeed;
         }
     }
 
-    public void EatingCookieSoundPlay()
-    {
-        EatingCookieTimer = .95f - player.GetComponent<PlayerForward>().speed;
+    public void EatingCookieSoundPlay(){
+        EatingCookieTimer = .95f - player.GetComponent<PlayerController>().speed;
         if (!EatingCookiePlayer.isPlaying)
             EatingCookiePlayer.Play();
     }
 
-    void ScoreControler()
-    {
+	//set collected seed amount, score, and highscore
+    void ScoreControler(){
         seedBoard.text = seedScore + " / " + maxScore;
         scoreBoard.text = (seedScore * 10).ToString();
         highscoreBoard.text = PlayerPrefs.GetInt("HighScore").ToString();
@@ -74,10 +71,9 @@ public class GameModeScript : MonoBehaviour
             PlayerPrefs.SetInt("HighScore", seedScore * 10);
     }
 
-    void GhostAudioController()
-    {
-        if (ghostAudio)
-        {
+	
+    /*void GhostAudioController(){
+        if (ghostAudio){
             foreach (GameObject ghost in Ghosts)
                 ghost.GetComponent<AudioSource>().volume = 0;
 
@@ -90,5 +86,5 @@ public class GameModeScript : MonoBehaviour
             closestGhost.GetComponent<AudioSource>().volume = 1;
 
         }
-    }
+    }*/
 }
