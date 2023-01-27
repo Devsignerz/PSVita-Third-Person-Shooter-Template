@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Devsignerz
-  productName: MJS Pacman
+  productName: Third Person Shooter Vita
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -554,8 +554,8 @@ PlayerSettings:
   psp2PackagedResourcesPath: 
   psp2SaveDataQuota: 10240
   psp2ParentalLevel: 1
-  psp2ShortTitle: Pacman
-  psp2ContentID: IV0000-PACMAN420_00-0123456789ABCDEF
+  psp2ShortTitle: TPSVita
+  psp2ContentID: IV0000-TPSV12345_00-0123456789ABCDEF
   psp2Category: 0
   psp2MasterVersion: 01.00
   psp2AppVersion: 01.00
