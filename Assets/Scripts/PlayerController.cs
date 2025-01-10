@@ -2,15 +2,16 @@
 
 public class PlayerController : MonoBehaviour {
 	public CharacterController characterController; //player character controller
-	public float speed = 6f; //player move speed
+	public float speed; //player move speed
 	private float turnSmoothTime = 0.1f; //player rotation smoothness
 	private float turnSmoothVelocity; //camera rotation smooth velocity
 	public float rotationSpeed; //player rotation speed
-	public float health = 100f; //player health
+	public float health; //player health
 	public bool isArmed = false; //is player aiming
 	[SerializeField]private Transform thetarget; //camera point target
-	[SerializeField]private Transform thearmedTarget; //camera point target when aiming
 	[SerializeField]private GameObject aimsight; //aim dot sight
+	[SerializeField]private Animator playerAnim; //animator attached to player character
+	[SerializeField]private Transform playerSpine;
 
 	//take damage
 	public void GetHit(float damage){
@@ -33,16 +34,16 @@ public class PlayerController : MonoBehaviour {
 		// Arm the player with weapons
 		if (Input.GetKey(KeyCode.JoystickButton4)){ 
 			isArmed = true;
-			speed = 3f; 
-			Camera.main.GetComponent<CameraController>().target = thearmedTarget;
+			Camera.main.fieldOfView = 25f;
 			aimsight.SetActive(true);
+			playerAnim.SetBool("aiming", true);
 		} 
 		// Unarm the player
 		else { 
 			isArmed = false; 
-			speed = 6f;
-			Camera.main.GetComponent<CameraController>().target = thetarget; 
+			Camera.main.fieldOfView = 40f;
 			aimsight.SetActive(false);
+			playerAnim.SetBool("aiming", false);
 		} 
 		
 
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour {
 
 		//character movement
 		if (dir.magnitude >= 0.1f){
+			playerAnim.SetBool("walking", true);
 			if (isArmed){
 				// Handle strafing and backward movement when armed
 				Vector3 cameraRight = Camera.main.transform.right;
@@ -64,6 +66,7 @@ public class PlayerController : MonoBehaviour {
 
 				// Make the player face the camera's direction when armed
 				Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
+				playerSpine.rotation = Quaternion.Slerp(playerSpine.rotation, Quaternion.LookRotation(Camera.main.transform.forward), rotationSpeed*Time.deltaTime);
 				transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 				} 
 			else {
@@ -79,12 +82,17 @@ public class PlayerController : MonoBehaviour {
 		}
 		//camera fix for armed character
 		else if(isArmed){
+			playerAnim.SetBool("walking", false);
 			// Ensure the player faces the camera's direction even when not moving
 			Vector3 cameraForward = Camera.main.transform.forward;
 			cameraForward.y = 0;
 			// Ensure the character does not tilt up/down
 			Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
+			playerSpine.rotation = Quaternion.Slerp(playerSpine.rotation, Quaternion.LookRotation(Camera.main.transform.forward), rotationSpeed*Time.deltaTime);
 			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+		}
+		else{
+			playerAnim.SetBool("walking", false);
 		}
 	}
 }
