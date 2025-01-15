@@ -10,27 +10,37 @@ public class GunManager : MonoBehaviour {
 	public int ammo;
 	public int mag;
 	public int currentAmmo;
-	[SerializeField] private Text ammoCounter;
+	private bool canShoot = true;
+	//[SerializeField] private Text ammoCounter;
 	[SerializeField] private PlayerController controller;
-	[SerializeField] private Transform gunHole;
-	public AudioClip shootingSound;
-	public AudioClip reloadSound;
+	//public AudioClip shootingSound;
+	//public AudioClip reloadSound;
+	[SerializeField] private ParticleSystem pt;
 
 	private void Update(){
+		if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("shoot")){
+			canShoot = false;
+		}
+		else{
+			canShoot = true;
+		}
+
 		//check if gun is automatic or single shot
 		if(singleShot){
 			if(controller.isArmed){
 				if(Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.E)){
-					shoot();
-					GetComponent<AudioSource>().Play();
-					ammoCounter.text = currentAmmo +"/"+mag;
+					if(canShoot){
+						shoot();
+						//GetComponent<AudioSource>().Play();
+						//ammoCounter.text = currentAmmo +"/"+mag;
+					}
 				}
 			}
 			else{
 				if(Input.GetKeyDown(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.E)){
 					reload();
-					GetComponent<AudioSource>().Play();
-					ammoCounter.text = currentAmmo +"/"+mag;
+					//GetComponent<AudioSource>().Play();
+					//ammoCounter.text = currentAmmo +"/"+mag;
 				}
 			}
 		}
@@ -51,16 +61,18 @@ public class GunManager : MonoBehaviour {
 					hit.collider.gameObject.GetComponent<EnemyAI>().GetHit(damage);
 					print(hit.collider.gameObject.GetComponent<EnemyAI>().health);
 				}
-				GetComponent<AudioSource>().clip = shootingSound;
+				//GetComponent<AudioSource>().clip = shootingSound;
 			}
 		}
 		
-
+		//animation
+		GetComponent<Animator>().Play("shoot");
+		pt.Play();
 		
 	}
 
 	public void reload(){
-		GetComponent<AudioSource>().clip = reloadSound;
+		//GetComponent<AudioSource>().clip = reloadSound;
 		currentAmmo = ammo;
 		mag--;
 	}

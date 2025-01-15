@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour {
 
 
 		// Arm the player with weapons
-		if (Input.GetKey(KeyCode.JoystickButton4)){ 
+		if (Input.GetKey(KeyCode.JoystickButton4) || Input.GetKey(KeyCode.Q)){ 
 			isArmed = true;
 			Camera.main.fieldOfView = 25f;
 			aimsight.SetActive(true);
